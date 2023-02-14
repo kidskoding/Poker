@@ -3,6 +3,7 @@ import java.util.*;
 public class Poker extends World {
     private Player player;
     private Player cpu;
+    
     private List<Card> playerHand;
     private List<Card> cpuHand;
     private List<Card> cards;
@@ -40,13 +41,9 @@ public class Poker extends World {
         for(int i = 0; i < 10; i++) {
             if(i < 5) {
                 playerHand.add(cards.get(i));
-                cards.remove(i);
-                i--;
             }
             else {
                 cpuHand.add(cards.get(i));
-                cards.remove(i);
-                i--;
             }
         }
         int x = 0;
@@ -54,7 +51,7 @@ public class Poker extends World {
             card.setLocation(300 + x, 610);
             x += 150;
         }
-        x = 0;
+        x = 0;        
         GreenfootImage redBack = new GreenfootImage("playingcard_back_red.png");
         redBack.scale(234 / 2, 322 / 2);
         for(Card card : cpuHand) {
@@ -68,13 +65,17 @@ public class Poker extends World {
             card.showCard();
         }
         if(this.allFaceUp(playerHand)) {
-            Greenfoot.delay(80);
-            for(int i = 0; i < playerHand.size(); i++) {
-                Card temp = playerHand.get(i);
-                if(Greenfoot.mouseClicked(temp)) {
-                    temp.setLocation(100, 400);
-                    Card newCard = cards.get(0);
-                    newCard.setLocation(636, 395);
+            //Greenfoot.delay(80);
+            for(Card card : playerHand) {
+                if(playerHand.indexOf(card) != -1) {
+                    if(Greenfoot.mouseClicked(card)) {
+                        card.setLocation(100, 400);
+                        Greenfoot.delay(20);
+                        this.removeObject(card);
+                        Card newCard = cards.get(cards.size() - 1);                        
+                        newCard.showCard();
+                        newCard.setLocation(300 + 150 * playerHand.indexOf(card), 610);
+                    }
                 }
             }
         }
