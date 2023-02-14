@@ -3,7 +3,8 @@ import java.io.*;
 import java.awt.Desktop;
 public class Instructions extends Button
 {
-    public static final File f = new File("C:\\Users\\aniru\\OneDrive\\Documents\\Greenfoot\\Poker\\images\\pokerhands.jpg");
+    public static final File f 
+    = new File("C:\\Users\\aniru\\OneDrive\\Documents\\Greenfoot\\Poker\\images\\pokerhands.jpg");
     public Instructions() {
         super("View Poker Hands");
     }
