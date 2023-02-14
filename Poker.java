@@ -40,13 +40,9 @@ public class Poker extends World {
         for(int i = 0; i < 10; i++) {
             if(i < 5) {
                 playerHand.add(cards.get(i));
-                cards.remove(i);
-                i--;
             }
             else {
                 cpuHand.add(cards.get(i));
-                cards.remove(i);
-                i--;
             }
         }
         int x = 0;
