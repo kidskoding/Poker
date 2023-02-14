@@ -4,9 +4,9 @@ public class Card extends Actor {
         "9", "10", "jack", "queen", "king"};
     private static String[] suits = {"club", 
         "diamond", "heart", "spade"};
-    private static GreenfootImage back 
-    = new GreenfootImage("playingcard_back_blue.png");
-    
+    private GreenfootImage back 
+        = new GreenfootImage("playingcard_back_blue.png");
+        
     private int id;
     private int value;
     private String suit;
@@ -25,6 +25,10 @@ public class Card extends Actor {
         hideCard();
     }
     
+    public void setBack(GreenfootImage back) {
+        this.back = back;
+        setImage(back);
+    }
     public int getValue() {
         return value;
     }

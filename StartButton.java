@@ -1,18 +1,8 @@
 import greenfoot.*;
-public class StartButton extends Actor
+public class StartButton extends Button
 {
-    private GreenfootImage text;
-    private GreenfootImage buttonLayout;
-    
     public StartButton() {
-        buttonLayout = new GreenfootImage(300, 100);
-        buttonLayout.drawRect(100, 100, 100, 20);
-        buttonLayout.setColor(Color.RED);
-        buttonLayout.fill();
-        setImage(buttonLayout);
-        
-        text = new GreenfootImage("START", 40, null, null);
-        buttonLayout.drawImage(text, 100, 35);
+        super("START");
     }
     public void act()
     {
