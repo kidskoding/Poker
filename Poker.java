@@ -40,9 +40,13 @@ public class Poker extends World {
         for(int i = 0; i < 10; i++) {
             if(i < 5) {
                 playerHand.add(cards.get(i));
+                cards.remove(i);
+                i--;
             }
             else {
                 cpuHand.add(cards.get(i));
+                cards.remove(i);
+                i--;
             }
         }
         int x = 0;
@@ -69,9 +73,8 @@ public class Poker extends World {
                 Card temp = playerHand.get(i);
                 if(Greenfoot.mouseClicked(temp)) {
                     temp.setLocation(100, 400);
-                    this.removeObject(temp);
                     Card newCard = cards.get(0);
-                    newCard.setLocation(300 + 150 * i, 610);
+                    newCard.setLocation(636, 395);
                 }
             }
         }
