@@ -37,7 +37,7 @@ public class Poker extends World {
             Card aCard = deck.getDeck().pop();
             this.addObject(aCard, 1050, 400);
         }
-        cards = this.getObjectsAt(1000, 400, Card.class);
+        cards = this.getObjectsAt(1050, 400, Card.class);
         for(int i = 0; i < 10; i++) {
             if(i < 5) {
                 playerHand.add(cards.get(i));
@@ -60,6 +60,7 @@ public class Poker extends World {
             x += 150;
         }
     }
+    
     public void playGame() {
         for(Card card : playerHand) {
             card.showCard();
@@ -72,15 +73,23 @@ public class Poker extends World {
                         card.setLocation(100, 400);
                         Greenfoot.delay(20);
                         this.removeObject(card);
+                        
                         Card newCard = cards.get(cards.size() - 1);                        
                         newCard.showCard();
-                        newCard.setLocation(300 + 150 * playerHand.indexOf(card), 610);
+                        newCard.setLocation(300 + 150 
+                            * playerHand.indexOf(card), 610);
+                    }
+                }
+                if(playerHand.indexOf(card) == -1) {
+                    if(Greenfoot.mouseClicked(card)) {
+                        card.showCard();
                     }
                 }
             }
         }
         round++;
     }
+    
     public void act() {
         playGame();
     }
