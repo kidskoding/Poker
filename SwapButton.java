@@ -6,6 +6,8 @@ public class SwapButton extends Button
     }
     public void act()
     {
-        
+        if(Greenfoot.mouseClicked(this)) {
+            
+        }
     }
 }

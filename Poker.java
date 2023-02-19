@@ -3,14 +3,14 @@ import java.util.*;
 public class Poker extends World {
     private Player player;
     private Player cpu;
-    
+
     private List<Card> playerHand;
     private List<Card> cpuHand;
     private List<Card> cards;
-    
+
     private int round;
     private Deck deck;
-    
+
     public Poker() {  
         super(1280, 720, 1);
         this.player = new Player();
@@ -21,17 +21,21 @@ public class Poker extends World {
         this.round = 1;
         createGame();
     }
-    
+
+    public void act() {
+        playGame();
+    }
+
     private void createGame() {
         Color c = new Color(1, 126, 60);
         GreenfootImage bg 
-            = new GreenfootImage(this.getWidth(), this.getHeight());        
+        = new GreenfootImage(this.getWidth(), this.getHeight());        
         bg.setColor(c);
         bg.fill();
         this.setBackground(bg);
         GreenfootImage score = new GreenfootImage("Round " 
-            + round + ": " + player.getScore() + " - " + cpu.getScore(), 
-            45, null, null); 
+                + round + ": " + player.getScore() + " - " + cpu.getScore(), 
+                45, null, null); 
         this.getBackground().drawImage(score, 50, 30);
         while(!deck.getDeck().isEmpty()) {
             Card aCard = deck.getDeck().pop();
@@ -60,30 +64,36 @@ public class Poker extends World {
             x += 150;
         }
     }
+
     public void playGame() {
         for(Card card : playerHand) {
             card.showCard();
         }
         if(this.allFaceUp(playerHand)) {
-            //Greenfoot.delay(80);
-            for(Card card : playerHand) {
-                if(playerHand.indexOf(card) != -1) {
+            Greenfoot.delay(80);
+            SwapButton swap = new SwapButton();
+            this.addObject(swap, 600, 425);
+            if(Greenfoot.mouseClicked(swap)) {
+                this.removeObject(swap);
+                for(Card card : playerHand) {
                     if(Greenfoot.mouseClicked(card)) {
                         card.setLocation(100, 400);
                         Greenfoot.delay(20);
                         this.removeObject(card);
-                        Card newCard = cards.get(cards.size() - 1);                        
+                        Card newCard = cards.get(cards.size() - 1);
                         newCard.showCard();
                         newCard.setLocation(300 + 150 * playerHand.indexOf(card), 610);
                     }
                 }
+            } else {
+                Greenfoot.delay(80);
+                this.removeObject(swap);
             }
+            round++;
         }
         round++;
     }
-    public void act() {
-        playGame();
-    }
+
     private boolean allFaceUp(List<Card> hand) {
         for(int i = 0; i < hand.size(); i++) {
             if(!hand.get(i).isShowing()) {
